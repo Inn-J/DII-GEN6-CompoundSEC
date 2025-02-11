@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 class Card {
     private String name;
-    private String id;
+    private final String id;
     private String position;
-    private String level;
+    private char level;
     private String password;
 
-    public Card(String name, String id, String position, String level, String password) {
+    public Card(String name, String id, String position, char level, String password) {
         this.name = name;
         this.id = id;
         this.position = position;
@@ -20,7 +20,7 @@ class Card {
         return id;
     }
 
-    public void updateCard(String name, String position, String level, String password) {
+    public void updateCard(String name, String position, char level, String password) {
         this.name = name;
         this.position = position;
         this.level = level;
@@ -44,7 +44,7 @@ class Card {
         System.out.print("Enter Position: ");
         String position = input.nextLine();
         System.out.print("Enter Level: ");
-        String level = input.nextLine();
+        char level = input.next().charAt(0);
         System.out.print("Enter Password: ");
         String password = input.nextLine();
         cards.add(new Card(name, id, position, level, password));
@@ -61,10 +61,9 @@ class Card {
                 System.out.print("Enter New Position: ");
                 String position = scanner.nextLine();
                 System.out.print("Enter New Level: ");
-                String level = scanner.nextLine();
+                char level = scanner.next().charAt(0);
                 System.out.print("Enter New Password: ");
                 String password = scanner.nextLine();
-
                 card.updateCard(name, position, level, password);
                 System.out.println("Card updated successfully!");
                 return;
@@ -96,5 +95,25 @@ class Card {
             }
         }
         System.out.println("Card not found.");
+    }
+    class Class_S extends Card {
+        public Class_S(String name, String id, String position, char level, String password) {
+            super(name, id, position, level, password);
+        }
+}
+    class Class_A extends Card {
+        public Class_A(String name, String id, String position, char level, String password) {
+            super(name, id, position, level, password);
+        }
+    }
+    class Class_B extends Card {
+        public Class_B(String name, String id, String position, char level, String password) {
+            super(name, id, position, level, password);
+        }
+    }
+    class Class_C extends Card {
+        public Class_C(String name, String id, String position, char level, String password) {
+            super(name, id, position, level, password);
+        }
     }
 }

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Main {
+public class CardManagement {
     private static ArrayList<Card> cards = new ArrayList<>();
     private static Scanner input = new Scanner(System.in);
 
