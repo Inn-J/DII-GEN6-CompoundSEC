@@ -1,0 +1,5 @@
+Kim,200,Manager,A,12345
+Gin,100,Co-owner,S,12345
+Jim,300,Unknown,B,12345
+Lim,400,General Employee,C,12345
+Sim,401,Junitor,C,12345

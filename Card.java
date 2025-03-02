@@ -1,9 +1,8 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import javax.swing.*;
 
 class Card {
     private String name;
-    private final String id;
+    private String id;
     private String position;
     private char level;
     private String password;
@@ -16,104 +15,210 @@ class Card {
         this.password = password;
     }
 
+    interface Action {
+        void editCard(Card card, Card loggedInUser);
+        void removeCard(Card card, Card loggedInUser);
+    }
+
     public String getId() {
         return id;
     }
 
-    public void updateCard(String name, String position, char level, String password) {
+    public char getLevel() {
+        return level;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+
+    public void setCard(String name, String position, char level, String password) {
         this.name = name;
         this.position = position;
         this.level = level;
         this.password = password;
     }
 
-    public void displayCard() {
-        System.out.println("\nCard");
-        System.out.println("Name: " + name);
-        System.out.println("ID: " + id);
-        System.out.println("Position: " + position);
-        System.out.println("Level: " + level);
-        System.out.println("----------------------");
+    public boolean checkPassword(String inputPassword) {
+        return this.password.equals(inputPassword);
     }
 
-    public static void addCard(ArrayList<Card> cards, Scanner input) {
-        System.out.print("Enter Name: ");
-        String name = input.nextLine();
-        System.out.print("Enter ID: ");
-        String id = input.nextLine();
-        System.out.print("Enter Position: ");
-        String position = input.nextLine();
-        System.out.print("Enter Level: ");
-        char level = input.next().charAt(0);
-        System.out.print("Enter Password: ");
-        String password = input.nextLine();
-        cards.add(new Card(name, id, position, level, password));
-        System.out.println("Card added successfully!");
+    public String getName() {
+        return name;
     }
 
-    public static void editCard(ArrayList<Card> cards, Scanner scanner) {
-        System.out.print("Enter ID of the card to edit: ");
-        String id = scanner.nextLine();
-        for (Card card : cards) {
-            if (card.getId().equals(id)) {
-                System.out.print("Enter New Name: ");
-                String name = scanner.nextLine();
-                System.out.print("Enter New Position: ");
-                String position = scanner.nextLine();
-                System.out.print("Enter New Level: ");
-                char level = scanner.next().charAt(0);
-                System.out.print("Enter New Password: ");
-                String password = scanner.nextLine();
-                card.updateCard(name, position, level, password);
-                System.out.println("Card updated successfully!");
-                return;
-            }
-        }
-        System.out.println("Card not found.");
-    }
-
-    public static void removeCard(ArrayList<Card> cards, Scanner scanner) {
-        System.out.print("Enter ID of the card to remove: ");
-        String id = scanner.nextLine();
-        for (Card card : cards) {
-            if (card.getId().equals(id)) {
-                cards.remove(card);
-                System.out.println("Card removed successfully!");
-                return;
-            }
-        }
-        System.out.println("Card not found.");
-    }
-
-    public static void displayCard(ArrayList<Card> cards, Scanner scanner) {
-        System.out.print("Enter ID of the card to display: ");
-        String id = scanner.nextLine();
-        for (Card card : cards) {
-            if (card.getId().equals(id)) {
-                card.displayCard();
-                return;
-            }
-        }
-        System.out.println("Card not found.");
-    }
-    class Class_S extends Card {
+    static class Class_S extends Card  {
         public Class_S(String name, String id, String position, char level, String password) {
             super(name, id, position, level, password);
         }
-}
-    class Class_A extends Card {
+    }
+
+    static class Class_A extends Card {
         public Class_A(String name, String id, String position, char level, String password) {
             super(name, id, position, level, password);
         }
     }
-    class Class_B extends Card {
+
+    static class Class_B extends Card {
         public Class_B(String name, String id, String position, char level, String password) {
             super(name, id, position, level, password);
         }
     }
-    class Class_C extends Card {
+
+    static class Class_C extends Card {
         public Class_C(String name, String id, String position, char level, String password) {
             super(name, id, position, level, password);
         }
     }
-}
+
+        public Action getAction() {
+            return switch (this.level) {
+                case 'S' -> new Level_S();
+                case 'A' -> new Level_A();
+                case 'B' -> new Level_B();
+                default -> new Level_C();
+            };
+        }
+    }
+
+    // Role-based Implementations
+    class Level_S implements Card.Action {
+        @Override
+        public void editCard(Card card, Card loggedInUser) {
+            if (loggedInUser.getLevel() != 'S') {
+                JOptionPane.showMessageDialog(null, "You do not have permission to edit this card.");
+                return;
+            }
+
+            JTextField nameField = new JTextField(card.getName());
+            JTextField positionField = new JTextField(card.getPosition());
+            String[] levels = {"S", "A", "B", "C"};
+            JComboBox<String> levelBox = new JComboBox<>(levels);
+            levelBox.setSelectedItem(String.valueOf(card.getLevel()));
+            JPasswordField passwordField = new JPasswordField(card.getPassword());
+
+            Object[] message = {
+                    "Name:", nameField,
+                    "Position:", positionField,
+                    "Level:", levelBox,
+                    "Password:", passwordField
+            };
+
+            int option = JOptionPane.showConfirmDialog(null, message, "Edit Card", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                card.setCard(nameField.getText().trim(), positionField.getText().trim(),
+                        ((String) levelBox.getSelectedItem()).charAt(0), new String(passwordField.getPassword()));
+            }
+        }
+
+        @Override
+        public void removeCard(Card card, Card loggedInUser) {
+            if (loggedInUser.getLevel() != 'S' || (card.getLevel() == 'S' && !card.getId().equals(loggedInUser.getId()))) {
+                JOptionPane.showMessageDialog(null, "You do not have permission to delete this card.");
+                return;
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this card?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "Card deleted successfully.");
+            }
+        }
+    }
+
+    class Level_A implements Card.Action {
+        @Override
+        public void editCard(Card card, Card loggedInUser) {
+            if (loggedInUser.getLevel() != 'A') {
+                JOptionPane.showMessageDialog(null, "You do not have permission to edit this card.");
+                return;
+            }
+
+            if (card.getId().equals(loggedInUser.getId())) {
+                JPasswordField passwordField = new JPasswordField();
+                Object[] message = {"New Password:", passwordField};
+
+                int option = JOptionPane.showConfirmDialog(null, message, "Change Password", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
+                }
+            } else if (card.getLevel() == 'B' || card.getLevel() == 'C') {
+                JTextField positionField = new JTextField(card.getPosition());
+                Object[] message = {"New Position:", positionField};
+
+                int option = JOptionPane.showConfirmDialog(null, message, "Edit Position", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(card.getName(), positionField.getText().trim(), card.getLevel(), card.getPassword());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You cannot edit this card.");
+            }
+        }
+
+        @Override
+        public void removeCard(Card card, Card loggedInUser) {
+            if (card.getId().equals(loggedInUser.getId())) {
+                JOptionPane.showMessageDialog(null, "Card deleted successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "You cannot delete other users' cards.");
+            }
+        }
+    }
+
+    class Level_B implements Card.Action {
+        @Override
+        public void editCard(Card card, Card loggedInUser) {
+            if (!card.getId().equals(loggedInUser.getId())) {
+                JOptionPane.showMessageDialog(null, "You can only edit your own password.");
+                return;
+            }
+
+            JPasswordField passwordField = new JPasswordField();
+            Object[] message = {"New Password:", passwordField};
+
+            int option = JOptionPane.showConfirmDialog(null, message, "Change Password", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
+            }
+        }
+
+        @Override
+        public void removeCard(Card card, Card loggedInUser) {
+            if (card.getId().equals(loggedInUser.getId())) {
+                JOptionPane.showMessageDialog(null, "Card deleted successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "You cannot delete other users' cards.");
+            }
+        }
+    }
+
+    class Level_C implements Card.Action {
+        @Override
+        public void editCard(Card card, Card loggedInUser) {
+            if (!card.getId().equals(loggedInUser.getId())) {
+                JOptionPane.showMessageDialog(null, "You can only edit your own password.");
+                return;
+            }
+
+            JPasswordField passwordField = new JPasswordField();
+            Object[] message = {"New Password:", passwordField};
+
+            int option = JOptionPane.showConfirmDialog(null, message, "Change Password", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
+            }
+        }
+
+        @Override
+        public void removeCard(Card card, Card loggedInUser) {
+            if (card.getId().equals(loggedInUser.getId())) {
+                JOptionPane.showMessageDialog(null, "Card deleted successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "You cannot delete other users' cards.");
+            }
+        }
+    }
