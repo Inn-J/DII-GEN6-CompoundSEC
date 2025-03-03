@@ -47,7 +47,6 @@ public class CardManagement {
         timePanel.add(timeLabel, BorderLayout.CENTER);
         frame.add(timePanel, BorderLayout.NORTH); // 🔹 เปลี่ยนไปไว้ด้านบน
 
-        // ✅ Timer สำหรับอัปเดตเวลา
         Timer timer = new Timer(1000, e -> updateTime());
         timer.start();
 

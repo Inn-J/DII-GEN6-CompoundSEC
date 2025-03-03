@@ -38,6 +38,9 @@ public class Room extends JFrame {
         JPanel menuPanel = new JPanel(new GridLayout(1, 7));
         add(menuPanel, BorderLayout.NORTH);
 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/SCGM Logo.png"));
+        this.setIconImage(icon.getImage());
+
         timeLabel = new JLabel();
         updateTime();
         menuPanel.add(timeLabel);
@@ -111,7 +114,11 @@ public class Room extends JFrame {
     private boolean userHasAccess(int floor, String room) {
         if (loggedInUser.getLevel() == 'S') {
             return true;
-        } else if (floor == 5) {
+        }
+        else if (loggedInUser.getLevel() == 'C') {
+        return floor == 1 || floor == 2;
+        }
+        else if (floor == 5) {
             if (loggedInUser.getLevel() == 'A') {
                 LocalTime now = LocalTime.now();
                 return now.isAfter(LocalTime.of(8, 59)) && now.isBefore(LocalTime.of(16, 1));
@@ -132,17 +139,13 @@ public class Room extends JFrame {
     private void logRoomAccess(String room, boolean accessGranted) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String status = accessGranted ? "granted" : "denied";
-        String log = loggedInUser.getName() + " attempted to access " + room + " at " + timestamp + " - Access " + status;
+        String log = "["+timestamp+"] "+ loggedInUser.getName() + " attempted to access " + room + " - Access " + status;
         accessLogs.add(log);
         AuditLog.saveLogToFile(log);
         AuditLog.updateLogs();
     }
 
     private void returnToMainMenu() {
-        String logoutLog = "User " + loggedInUser.getName() + " (Level: " + loggedInUser.getLevel() + ") logged out at "
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        loginLogs.add(logoutLog);
-
         App mainMenu = new App(loggedInUser, accessLogs, loginLogs);
         mainMenu.setVisible(true);
         this.setVisible(false);

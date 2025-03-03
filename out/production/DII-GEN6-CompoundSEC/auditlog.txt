@@ -10,3 +10,47 @@ User Gin (Level: S) logged out at 2025-03-03 03:39:26
 User Gin (Level: S) logged out at 2025-03-03 03:39:45
 [2025-03-03 03:41:43] User Gin (Level: S) logged in
 [2025-03-03 03:46:03] User Gin (Level: S) logged in
+[2025-03-03 03:51:36] User Gin (Level: S) logged in
+[2025-03-03 08:15:21] User Kim (Level: A) logged in
+[2025-03-03 08:15:29] Card Edited: ID=100, Name: Gin, Position: Co-owner , Level: S
+[2025-03-03 08:15:34] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+[2025-03-03 08:15:38] Card Edited: ID=400, Name: Lim, Position: General Employee , Level: C
+[2025-03-03 08:15:42] Card Edited: ID=401, Name: Sim, Position: Junitor , Level: C
+[2025-03-03 08:15:53] Card Edited: ID=400, Name: Lim, Position: General Employee , Level: C
+Kim attempted to access CEO's Room at 2025-03-03 08:16:01 - Access denied
+Kim attempted to access CFO's Room at 2025-03-03 08:16:05 - Access denied
+Kim attempted to access Canteen at 2025-03-03 08:16:10 - Access granted
+Kim attempted to access Bar at 2025-03-03 08:16:14 - Access denied
+User Kim (Level: A) logged out at 2025-03-03 08:16:18
+[2025-03-03 08:16:25] User Jim (Level: B) logged in
+[2025-03-03 08:16:31] Card Edited: ID=400, Name: Lim, Position: General Employee , Level: C
+[2025-03-03 08:16:36] Card Edited: ID=401, Name: Sim, Position: Junitor , Level: C
+[2025-03-03 08:16:41] Card Edited: ID=400, Name: Lim, Position: General Employee , Level: C
+[2025-03-03 08:16:48] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+User Jim (Level: B) logged out at 2025-03-03 08:16:52
+[2025-03-03 08:17:01] User Lim (Level: C) logged in
+[2025-03-03 08:17:09] Card Edited: ID=200, Name: Kim, Position: Manager , Level: A
+[2025-03-03 08:17:14] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+[2025-03-03 08:17:21] Card Edited: ID=400, Name: Lim, Position: General Employee , Level: C
+Lim attempted to access Room 203 at 2025-03-03 08:17:29 - Access granted
+Lim attempted to access Meeting Room at 2025-03-03 08:17:37 - Access denied
+Lim attempted to access Room 303 at 2025-03-03 08:17:53 - Access granted
+User Lim (Level: C) logged out at 2025-03-03 08:17:57
+[2025-03-03 08:18:03] User Gin (Level: S) logged in
+User Gin (Level: S) logged out at 2025-03-03 08:18:37
+[2025-03-03 08:19:24] User Gin (Level: S) logged in
+Gin attempted to access Director's Room at 2025-03-03 08:20:30 - Access granted
+User Gin (Level: S) logged out at 2025-03-03 08:22:45
+[2025-03-03 08:22:51] User Gin (Level: S) logged in
+[2025-03-03 08:28:31] User Gin (Level: S) logged in
+[2025-03-03 08:28:42] Gin attempted to access CEO's Room - Access granted
+[2025-03-03 08:28:44] Gin attempted to access Meeting Room - Access granted
+[2025-03-03 08:30:34] User Gin (Level: S) logged out
+[2025-03-03 08:30:49] User Gin (Level: S) logged in
+[2025-03-03 08:30:56] User Gin (Level: S) logged out
+[2025-03-03 08:31:04] User Lim (Level: C) logged in
+[2025-03-03 08:31:13] Lim attempted to access Bar - Access denied
+[2025-03-03 08:31:16] Lim attempted to access Canteen - Access granted
+[2025-03-03 08:31:31] User Lim (Level: C) logged out
+[2025-03-03 08:31:37] User Gin (Level: S) logged in
+[2025-03-03 08:31:53] User Gin (Level: S) logged out

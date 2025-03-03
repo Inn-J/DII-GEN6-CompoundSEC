@@ -76,7 +76,7 @@ public class App extends JFrame {
         // กดปุ่ม "Logout"
         logoutButton.addActionListener(e -> {
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            String logoutLog = "User " + loggedInUser.getName() + " (Level: " + loggedInUser.getLevel() + ") logged out at " + timestamp;
+            String logoutLog = "["+timestamp+ "] User " + loggedInUser.getName() + " (Level: " + loggedInUser.getLevel() + ") logged out" ;
 
             loginLogs.add(logoutLog); // บันทึกการ logout ลงใน loginLogs
             AuditLog.saveLogToFile(logoutLog); // บันทึกลงไฟล์ auditlog.txt

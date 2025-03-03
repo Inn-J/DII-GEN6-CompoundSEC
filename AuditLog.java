@@ -28,6 +28,8 @@ public class AuditLog extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
+        ImageIcon icon = new ImageIcon(getClass().getResource("/SCGM Logo.png"));
+        this.setIconImage(icon.getImage());
 
         // สร้าง JTextArea สำหรับแสดง Log
         logTextArea = new JTextArea();
@@ -50,8 +52,6 @@ public class AuditLog extends JFrame {
         add(mainPanel);
         setVisible(true);
     }
-
-    // ✅ อัปเดต Log ได้ตลอดเวลา
     public static void updateLogs() {
         if (logTextArea == null) return; // 🔹 ป้องกัน NullPointerException
 
