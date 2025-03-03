@@ -59,7 +59,7 @@ public class CardManagement {
         createButton = new JButton("Create Card");
         editButton = new JButton("Edit Card");
         deleteButton = new JButton("Delete Card");
-        backButton = new JButton("Back to App");
+        backButton = new JButton("Main Menu");
 
 
         if (loggedInUser.getLevel() == 'S') {

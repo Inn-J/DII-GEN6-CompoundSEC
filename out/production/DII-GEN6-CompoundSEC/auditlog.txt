@@ -54,3 +54,33 @@ User Gin (Level: S) logged out at 2025-03-03 08:22:45
 [2025-03-03 08:31:31] User Lim (Level: C) logged out
 [2025-03-03 08:31:37] User Gin (Level: S) logged in
 [2025-03-03 08:31:53] User Gin (Level: S) logged out
+[2025-03-03 09:19:22] User Lim (Level: C) logged in
+[2025-03-03 09:19:25] Lim attempted to access Room 302 - Access denied
+[2025-03-03 09:19:27] Lim attempted to access Room 308 - Access denied
+[2025-03-03 09:19:29] Lim attempted to access Room 202 - Access granted
+[2025-03-03 09:19:38] User Lim (Level: C) logged out
+[2025-03-03 09:23:23] User Gin (Level: S) logged in
+[2025-03-03 09:24:23] User Gin (Level: S) logged in
+[2025-03-03 09:24:36] Card Edited: ID=200, Name: Kim, Position: Manager , Level: A
+[2025-03-03 09:24:41] Card Edited: ID=100, Name: Gin, Position: Co-owner , Level: S
+[2025-03-03 09:24:46] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+[2025-03-03 09:25:21] Card Edited: ID=100, Name: Gin, Position: Co-owner , Level: S
+[2025-03-03 09:25:25] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+[2025-03-03 09:25:29] Card Edited: ID=400, Name: Lim, Position: General Employee , Level: C
+[2025-03-03 09:26:41] User Gin (Level: S) logged in
+[2025-03-03 09:26:46] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+[2025-03-03 09:26:49] Card Edited: ID=200, Name: Kim, Position: Manager , Level: A
+[2025-03-03 09:27:02] User Gin (Level: S) logged out
+[2025-03-03 09:29:40] User Gin (Level: S) logged in
+[2025-03-03 09:29:53] Card Edited: ID=200, Name: Kim, Position: Manager , Level: A
+[2025-03-03 09:30:50] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+[2025-03-03 09:30:54] Card Edited: ID=400, Name: Lim, Position: General Employee , Level: C
+[2025-03-03 09:32:11] User Gin (Level: S) logged in
+[2025-03-03 09:32:24] Card Edited: ID=200, Name: Kim, Position: Manager , Level: A
+[2025-03-03 09:32:27] User Gin (Level: S) logged out
+[2025-03-03 09:36:06] User Kim (Level: A) logged in
+[2025-03-03 09:36:15] Card Edited: ID=300, Name: Jim, Position: Unknown , Level: B
+[2025-03-03 09:36:18] User Kim (Level: A) logged out
+[2025-03-03 09:40:10] User Kim (Level: A) logged in
+[2025-03-03 09:40:17] Card Edited: ID=401, Name: Sim, Position: Junitor , Level: C
+[2025-03-03 09:40:22] Card Edited: ID=401, Name: Sim, Position: Junitor , Level: C

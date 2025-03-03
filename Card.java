@@ -90,11 +90,6 @@ class Card {
     class Level_S implements Card.Action {
         @Override
         public void editCard(Card card, Card loggedInUser) {
-            if (loggedInUser.getLevel() != 'S') {
-                JOptionPane.showMessageDialog(null, "You do not have permission to edit this card.");
-                return;
-            }
-
             JTextField nameField = new JTextField(card.getName());
             JTextField positionField = new JTextField(card.getPosition());
             String[] levels = {"S", "A", "B", "C"};
@@ -118,10 +113,6 @@ class Card {
 
         @Override
         public void removeCard(Card card, Card loggedInUser) {
-            if (loggedInUser.getLevel() != 'S' || (card.getLevel() == 'S' && !card.getId().equals(loggedInUser.getId()))) {
-                JOptionPane.showMessageDialog(null, "You do not have permission to delete this card.");
-                return;
-            }
 
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this card?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
@@ -133,6 +124,27 @@ class Card {
     class Level_A implements Card.Action {
         @Override
         public void editCard(Card card, Card loggedInUser) {
+            if (loggedInUser.getLevel() == 'S'){
+                JTextField nameField = new JTextField(card.getName());
+                JTextField positionField = new JTextField(card.getPosition());
+                String[] levels = {"S", "A", "B", "C"};
+                JComboBox<String> levelBox = new JComboBox<>(levels);
+                levelBox.setSelectedItem(String.valueOf(card.getLevel()));
+                JPasswordField passwordField = new JPasswordField(card.getPassword());
+
+                Object[] message = {
+                        "Name:", nameField,
+                        "Position:", positionField,
+                        "Level:", levelBox,
+                        "Password:", passwordField
+                };
+
+                int option = JOptionPane.showConfirmDialog(null, message, "Edit Card", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(nameField.getText().trim(), positionField.getText().trim(),
+                            ((String) levelBox.getSelectedItem()).charAt(0), new String(passwordField.getPassword()));
+                }
+            }
             if (loggedInUser.getLevel() != 'A') {
                 JOptionPane.showMessageDialog(null, "You do not have permission to edit this card.");
                 return;
@@ -146,15 +158,8 @@ class Card {
                 if (option == JOptionPane.OK_OPTION) {
                     card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
                 }
-            } else if (card.getLevel() == 'B' || card.getLevel() == 'C') {
-                JTextField positionField = new JTextField(card.getPosition());
-                Object[] message = {"New Position:", positionField};
-
-                int option = JOptionPane.showConfirmDialog(null, message, "Edit Position", JOptionPane.OK_CANCEL_OPTION);
-                if (option == JOptionPane.OK_OPTION) {
-                    card.setCard(card.getName(), positionField.getText().trim(), card.getLevel(), card.getPassword());
-                }
-            } else {
+            }
+            else {
                 JOptionPane.showMessageDialog(null, "You cannot edit this card.");
             }
         }
@@ -172,17 +177,45 @@ class Card {
     class Level_B implements Card.Action {
         @Override
         public void editCard(Card card, Card loggedInUser) {
-            if (!card.getId().equals(loggedInUser.getId())) {
-                JOptionPane.showMessageDialog(null, "You can only edit your own password.");
-                return;
-            }
+            if (loggedInUser.getLevel() == 'S') {
+                JTextField nameField = new JTextField(card.getName());
+                JTextField positionField = new JTextField(card.getPosition());
+                String[] levels = {"S", "A", "B", "C"};
+                JComboBox<String> levelBox = new JComboBox<>(levels);
+                levelBox.setSelectedItem(String.valueOf(card.getLevel()));
+                JPasswordField passwordField = new JPasswordField(card.getPassword());
 
-            JPasswordField passwordField = new JPasswordField();
-            Object[] message = {"New Password:", passwordField};
+                Object[] message = {
+                        "Name:", nameField,
+                        "Position:", positionField,
+                        "Level:", levelBox,
+                        "Password:", passwordField
+                };
 
-            int option = JOptionPane.showConfirmDialog(null, message, "Change Password", JOptionPane.OK_CANCEL_OPTION);
-            if (option == JOptionPane.OK_OPTION) {
-                card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
+                int option = JOptionPane.showConfirmDialog(null, message, "Edit Card", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(nameField.getText().trim(), positionField.getText().trim(),
+                            ((String) levelBox.getSelectedItem()).charAt(0), new String(passwordField.getPassword()));
+                }
+            } else if (loggedInUser.getLevel() == 'A') {
+                JTextField positionField = new JTextField(card.getPosition());
+                Object[] message = {"New Position:", positionField};
+                int option = JOptionPane.showConfirmDialog(null, message, "Edit Position", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(card.getName(), positionField.getText().trim(), card.getLevel(), card.getPassword());
+                }
+                if (!card.getId().equals(loggedInUser.getId())) {
+                    JOptionPane.showMessageDialog(null, "You can only edit your own password.");
+                    return;
+                }
+
+                JPasswordField passwordField = new JPasswordField();
+                Object[] Bmessage = {"New Password:", passwordField};
+
+                option = JOptionPane.showConfirmDialog(null, Bmessage, "Change Password", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
+                }
             }
         }
 
@@ -199,17 +232,45 @@ class Card {
     class Level_C implements Card.Action {
         @Override
         public void editCard(Card card, Card loggedInUser) {
-            if (!card.getId().equals(loggedInUser.getId())) {
-                JOptionPane.showMessageDialog(null, "You can only edit your own password.");
-                return;
-            }
+            if (loggedInUser.getLevel() == 'S') {
+                JTextField nameField = new JTextField(card.getName());
+                JTextField positionField = new JTextField(card.getPosition());
+                String[] levels = {"S", "A", "B", "C"};
+                JComboBox<String> levelBox = new JComboBox<>(levels);
+                levelBox.setSelectedItem(String.valueOf(card.getLevel()));
+                JPasswordField passwordField = new JPasswordField(card.getPassword());
 
-            JPasswordField passwordField = new JPasswordField();
-            Object[] message = {"New Password:", passwordField};
+                Object[] message = {
+                        "Name:", nameField,
+                        "Position:", positionField,
+                        "Level:", levelBox,
+                        "Password:", passwordField
+                };
 
-            int option = JOptionPane.showConfirmDialog(null, message, "Change Password", JOptionPane.OK_CANCEL_OPTION);
-            if (option == JOptionPane.OK_OPTION) {
-                card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
+                int option = JOptionPane.showConfirmDialog(null, message, "Edit Card", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(nameField.getText().trim(), positionField.getText().trim(),
+                            ((String) levelBox.getSelectedItem()).charAt(0), new String(passwordField.getPassword()));
+                }
+            } else if (loggedInUser.getLevel() == 'A') {
+                JTextField positionField = new JTextField(card.getPosition());
+                Object[] message = {"New Position:", positionField};
+                int option = JOptionPane.showConfirmDialog(null, message, "Edit Position", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(card.getName(), positionField.getText().trim(), card.getLevel(), card.getPassword());
+                }
+                if (!card.getId().equals(loggedInUser.getId())) {
+                    JOptionPane.showMessageDialog(null, "You can only edit your own password.");
+                    return;
+                }
+
+                JPasswordField passwordField = new JPasswordField();
+                Object[] Cmessage = {"New Password:", passwordField};
+
+                option = JOptionPane.showConfirmDialog(null, Cmessage, "Change Password", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    card.setCard(card.getName(), card.getPosition(), card.getLevel(), new String(passwordField.getPassword()));
+                }
             }
         }
 
